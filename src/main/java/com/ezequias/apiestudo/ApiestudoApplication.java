@@ -8,7 +8,6 @@ public class ApiestudoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiestudoApplication.class, args);
-		System.out.println("teste");
 	}
 
 }
