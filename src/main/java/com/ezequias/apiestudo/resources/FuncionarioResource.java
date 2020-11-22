@@ -1,5 +1,7 @@
 package com.ezequias.apiestudo.resources;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +16,12 @@ import com.ezequias.apiestudo.domain.Funcionario;
 public class FuncionarioResource {
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Funcionario> listar() {
-		Funcionario f1 = new Funcionario(1, "João");
-		Funcionario f2 = new Funcionario(2, "Marcos");
+	public List<Funcionario> listar() throws ParseException {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
+		Funcionario f1 = new Funcionario(1, "João",sdf.parse("01/01/2000 10:32"));
+		Funcionario f2 = new Funcionario(2, "Marcos",sdf.parse("01/01/1992 10:32"));
 		
 		List<Funcionario> listaFuncionarios = new ArrayList<>();
 

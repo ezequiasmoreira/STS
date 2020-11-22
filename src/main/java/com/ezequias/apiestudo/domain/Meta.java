@@ -9,29 +9,39 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import javax.persistence.InheritanceType;
-import javax.persistence.Inheritance;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
-public class Funcionario implements Serializable{	
+public class Meta implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
-	private String nome;
-	
+	private Integer id ;
+	private Double valor;
+	private String descricao;
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
-	private Date nascimento;
+	private Date dataReferencia;
+	private Double comissao;
 	
-	public Funcionario() {		
+	public Meta() {
+	
 	}
 
-	public Funcionario(Integer id, String nome, Date nascimento) {
+	public Meta(Integer id, Double valor, String descricao, Date dataReferencia, Double comissao) {
 		super();
 		this.id = id;
-		this.nome = nome;
-		this.nascimento = nascimento;
+		this.valor = valor;
+		this.descricao = descricao;
+		this.comissao = comissao;
+		this.dataReferencia = dataReferencia;
+	}
+	
+	public Double getComissao() {
+		return comissao;
+	}
+
+	public void setComissao(Double comissao) {
+		this.comissao = comissao;
 	}
 
 	public Integer getId() {
@@ -42,20 +52,28 @@ public class Funcionario implements Serializable{
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public Double getValor() {
+		return valor;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	} 
-	
-	public Date getNascimento() {
-		return nascimento;
+	public void setValor(Double valor) {
+		this.valor = valor;
 	}
 
-	public void setNascimento(Date nascimento) {
-		this.nascimento = nascimento;
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Date getDataReferencia() {
+		return dataReferencia;
+	}
+
+	public void setDataReferencia(Date dataReferencia) {
+		this.dataReferencia = dataReferencia;
 	}
 
 	@Override
@@ -74,13 +92,16 @@ public class Funcionario implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Funcionario other = (Funcionario) obj;
+		Meta other = (Meta) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
-}
+	}
+	
+	
+	
 
+}
