@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ezequias.apiestudo.domain.Meta;
+import com.ezequias.apiestudo.domain.Representante;
 import com.ezequias.apiestudo.domain.Salario;
 import com.ezequias.apiestudo.domain.Vendedor;
 import com.ezequias.apiestudo.domain.enums.Cargo;
 import com.ezequias.apiestudo.dto.MetaDTO;
+import com.ezequias.apiestudo.dto.RepresentanteDTO;
 import com.ezequias.apiestudo.dto.SalarioDTO;
 import com.ezequias.apiestudo.dto.VendedorDTO;
 
@@ -23,7 +25,10 @@ public class BancoService {
 	private MetaService metaService;
 	
 	@Autowired
-	private VendedorService vendedorService;
+	private VendedorService vendedorService;	
+	
+	@Autowired
+	private RepresentanteService representanteService;
 	
 	public void instanciarBanco() throws ParseException {
 		Meta metaVendedores = criarMeta("Meta/Vendedores",1);
@@ -31,6 +36,9 @@ public class BancoService {
 		
 		Vendedor vendedor1 = criarVendedor(metaVendedores, "João da Silva");
 		Vendedor vendedor2 = criarVendedor(metaVendedores, "Pedro da Silva");
+		
+		Representante representante1 = criarRepresentante(metaRepresentantes, "Maria da silva");
+		Representante representante2 = criarRepresentante(metaRepresentantes, "Jose da silva");
 		
 	}
 	
@@ -58,6 +66,19 @@ public class BancoService {
 		vendedorDTO.setMetaId(meta.getId());
 		
 		return vendedorService.salvar(vendedorDTO);
+	}
+	
+public Representante criarRepresentante(Meta meta,String nome ) throws ParseException {	
+		
+		RepresentanteDTO representanteDTO = new RepresentanteDTO();		
+		Date nascimento = new Date();		
+		
+		representanteDTO.setId(null);
+		representanteDTO.setNome(nome);
+		representanteDTO.setNascimento(nascimento);
+		representanteDTO.setMetaId(meta.getId());
+		
+		return representanteService.salvar(representanteDTO);
 	}
 	
 	

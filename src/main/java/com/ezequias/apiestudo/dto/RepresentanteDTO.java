@@ -1,0 +1,61 @@
+package com.ezequias.apiestudo.dto;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import com.ezequias.apiestudo.domain.enums.Cargo;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+public class RepresentanteDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	private Integer id ;
+	private String nome;
+	private Integer metaId;
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+	private Date nascimento;
+	
+	public RepresentanteDTO() {	
+	}
+
+	public RepresentanteDTO(Integer id, String nome, Date nascimento, Integer metaId) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.nascimento = nascimento;
+		this.metaId = metaId;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Date getNascimento() {
+		return nascimento;
+	}
+
+	public void setNascimento(Date nascimento) {
+		this.nascimento = nascimento;
+	}
+
+	public Integer getMetaId() {
+		return metaId;
+	}
+
+	public void setMetaId(Integer metaId) {
+		this.metaId = metaId;
+	}
+	
+}
