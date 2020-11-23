@@ -14,7 +14,7 @@ import com.ezequias.apiestudo.specs.MetaSpec;
 
 @Service
 public class MetaService {	
-	
+	@Autowired
 	private MetaSpec metaSpec;
 	
 	@Autowired

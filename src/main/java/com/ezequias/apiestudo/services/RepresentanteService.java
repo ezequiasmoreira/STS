@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.ezequias.apiestudo.domain.Meta;
 import com.ezequias.apiestudo.domain.Representante;
+import com.ezequias.apiestudo.domain.Salario;
 import com.ezequias.apiestudo.domain.Vendedor;
 import com.ezequias.apiestudo.dto.MetaDTO;
 import com.ezequias.apiestudo.dto.RepresentanteDTO;
@@ -32,6 +33,15 @@ public class RepresentanteService {
 		representanteRepository.save(representante);
 		
 		return representante;
+	}
+	
+	public Representante obterPorId(Integer id) {
+		return representanteRepository.obterPorId(id);
+	}
+	
+	public Representante vincularSalario(Representante representante, Salario salario) {
+		representante.getSalarios().add(salario);
+		return representanteRepository.save(representante);
 	}
 
 }

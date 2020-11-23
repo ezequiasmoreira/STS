@@ -22,13 +22,13 @@ import com.ezequias.apiestudo.services.SalarioService;
 import com.ezequias.apiestudo.services.VendedorService;
 
 @RestController
-@RequestMapping(value="vendedores")
-public class VendedorResource {
+@RequestMapping(value="representantes")
+public class RepresentanteResource {
 	private SalarioService salarioService;
 	
 	@RequestMapping(value="salario", method = RequestMethod.POST)
 	public ResponseEntity<Void> adicionarSalario(@RequestBody SalarioDTO salarioDTO){
-		salarioDTO.setCargo(Cargo.VENDEDOR);
+		salarioDTO.setCargo(Cargo.REPRESENTANTE);
 		Salario obj = salarioService.salvar(salarioDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();

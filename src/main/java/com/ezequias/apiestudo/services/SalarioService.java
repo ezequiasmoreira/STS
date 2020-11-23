@@ -11,11 +11,22 @@ import com.ezequias.apiestudo.domain.Salario;
 import com.ezequias.apiestudo.domain.Vendedor;
 import com.ezequias.apiestudo.domain.enums.Cargo;
 import com.ezequias.apiestudo.dto.SalarioDTO;
+import com.ezequias.apiestudo.repositorys.SalarioRepository;
 
 @Service
 public class SalarioService {
 	@Autowired
 	private MetaService metaService;
+	
+	@Autowired
+	private VendedorService vendedorService;
+	
+	@Autowired
+	private RepresentanteService representanterService;
+	
+	@Autowired
+	private SalarioRepository salarioRepository;
+	
 	
 	public Salario calcularSalario(SalarioDTO salarioDTO) {
 		Salario salario = new Salario();
@@ -29,28 +40,32 @@ public class SalarioService {
 		
 		salario = metaService.calcularComissao(salario,meta);
 		
-		vincularSalario(salarioDTO,salario);
-		
 		return salario;
 	}
 	
 	public Meta obterMetaPor(SalarioDTO salarioDTO) {
 		
-		if (salarioDTO.getCargo().equals(Cargo.VENDEDOR)) {
-			Vendedor obj = new Vendedor();
-			return obj.getMeta();
+		if (salarioDTO.getCargo().equals(Cargo.VENDEDOR.getCod())) {
+			return vendedorService.obterPorId(salarioDTO.getEntidadeId()).getMeta();
 		}
 		
-		return new Meta();
-
+		return representanterService.obterPorId(salarioDTO.getEntidadeId()).getMeta();
 	}
 	
-public void vincularSalario(SalarioDTO salarioDTO, Salario salario) {
+	public void vincularSalario(SalarioDTO salarioDTO, Salario salario) {
 		
-		if (salarioDTO.getCargo().equals(Cargo.VENDEDOR)) {
-			Vendedor obj = new Vendedor();
-			obj.getSalarios().add(salario);
-		}		
+		if (salarioDTO.getCargo().equals(Cargo.VENDEDOR.getCod())) {
+			vendedorService.vincularSalario(vendedorService.obterPorId(salarioDTO.getEntidadeId()),salario);			
+		}
+		
+		representanterService.vincularSalario(representanterService.obterPorId(salarioDTO.getEntidadeId()),salario);
+	}
+	
+	public Salario salvar(SalarioDTO salarioDTO) {
+		
+		Salario salario = calcularSalario(salarioDTO);
+		
+		return salarioRepository.save(salario);
 	}
 
 }

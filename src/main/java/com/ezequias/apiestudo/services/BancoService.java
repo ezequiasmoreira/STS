@@ -25,7 +25,10 @@ public class BancoService {
 	private MetaService metaService;
 	
 	@Autowired
-	private VendedorService vendedorService;	
+	private VendedorService vendedorService;
+	
+	@Autowired
+	private SalarioService salarioService;
 	
 	@Autowired
 	private RepresentanteService representanteService;
@@ -40,6 +43,21 @@ public class BancoService {
 		Representante representante1 = criarRepresentante(metaRepresentantes, "Maria da silva");
 		Representante representante2 = criarRepresentante(metaRepresentantes, "Jose da silva");
 		
+		Salario salario1 = criarSalario(vendedor1);
+		vendedorService.vincularSalario(vendedor1, salario1);
+		Salario salario2 = criarSalario(vendedor1);
+		vendedorService.vincularSalario(vendedor1, salario2);
+		
+		Salario salario3 = criarSalario(vendedor2);
+		vendedorService.vincularSalario(vendedor2, salario3);
+		
+		Salario salario4 = criarSalario(representante1);
+		representanteService.vincularSalario(representante1, salario4);
+		Salario salario5 = criarSalario(representante1);
+		representanteService.vincularSalario(representante1, salario5);
+		
+		Salario salario6 = criarSalario(representante2);
+		representanteService.vincularSalario(representante2, salario6);	
 	}
 	
 	public Meta criarMeta(String descricao,Integer multiplicador ) throws ParseException {	
@@ -68,7 +86,7 @@ public class BancoService {
 		return vendedorService.salvar(vendedorDTO);
 	}
 	
-public Representante criarRepresentante(Meta meta,String nome ) throws ParseException {	
+	public Representante criarRepresentante(Meta meta,String nome ) throws ParseException {	
 		
 		RepresentanteDTO representanteDTO = new RepresentanteDTO();		
 		Date nascimento = new Date();		
@@ -79,6 +97,36 @@ public Representante criarRepresentante(Meta meta,String nome ) throws ParseExce
 		representanteDTO.setMetaId(meta.getId());
 		
 		return representanteService.salvar(representanteDTO);
+	}
+	
+	public Salario criarSalario(Vendedor vendedor ) throws ParseException {	
+		
+		SalarioDTO salarioDTO = new SalarioDTO();	
+		Date dataReferencia = new Date();
+		
+		salarioDTO.setId(null);
+		salarioDTO.setCargo(Cargo.VENDEDOR);
+		salarioDTO.setDataReferencia(dataReferencia);
+		salarioDTO.setSalarioBruto(1000.00);
+		salarioDTO.setDesconto(100.00);
+		salarioDTO.setEntidadeId(vendedor.getId());
+		
+		return salarioService.salvar(salarioDTO);
+	}
+	
+	public Salario criarSalario(Representante representante ) throws ParseException {	
+		
+		SalarioDTO salarioDTO = new SalarioDTO();	
+		Date dataReferencia = new Date();
+		
+		salarioDTO.setId(null);
+		salarioDTO.setCargo(Cargo.REPRESENTANTE);
+		salarioDTO.setDataReferencia(dataReferencia);
+		salarioDTO.setSalarioBruto(1000.00);
+		salarioDTO.setDesconto(100.00);
+		salarioDTO.setEntidadeId(representante.getId());
+		
+		return salarioService.salvar(salarioDTO);
 	}
 	
 	

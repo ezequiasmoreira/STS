@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ezequias.apiestudo.domain.Meta;
+import com.ezequias.apiestudo.domain.Salario;
 import com.ezequias.apiestudo.domain.Vendedor;
 import com.ezequias.apiestudo.dto.MetaDTO;
 import com.ezequias.apiestudo.dto.VendedorDTO;
@@ -30,5 +31,13 @@ public class VendedorService {
 		
 		return vendedor;
 	}
-
+	
+	public Vendedor obterPorId(Integer id) {
+		return vendedorRepository.obterPorId(id);
+	}
+	
+	public Vendedor vincularSalario(Vendedor vendedor, Salario salario) {
+		vendedor.getSalarios().add(salario);
+		return vendedorRepository.save(vendedor);
+	}
 }
