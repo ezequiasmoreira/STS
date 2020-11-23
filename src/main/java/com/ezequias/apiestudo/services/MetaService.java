@@ -1,11 +1,22 @@
 package com.ezequias.apiestudo.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.ezequias.apiestudo.domain.Meta;
 import com.ezequias.apiestudo.domain.Salario;
+import com.ezequias.apiestudo.dto.MetaDTO;
+import com.ezequias.apiestudo.repositorys.MetaRepository;
 import com.ezequias.apiestudo.specs.MetaSpec;
 
-public class MetaService {
+@Service
+public class MetaService {	
+	
 	private MetaSpec metaSpec;
+	
+	@Autowired
+	private MetaRepository metaRepository;
+	
 	public Salario calcularComissao (Salario salario,Meta meta) {
 		
 		Boolean geraComissao =  metaSpec.geraComissao(salario, meta);
@@ -16,6 +27,20 @@ public class MetaService {
 		}
 		
 		return salario;
+	}
+	
+	public Meta salvar(MetaDTO metaDTO) {
+		Meta meta = new Meta();
+		
+		meta.setId(null);
+		meta.setValor(metaDTO.getValor());
+		meta.setComissao(metaDTO.getComissao());
+		meta.setDescricao(metaDTO.getDescricao());
+		meta.setDataReferencia(metaDTO.getDataReferencia());
+		
+		metaRepository.save(meta);
+		
+		return meta;
 	}
 
 }

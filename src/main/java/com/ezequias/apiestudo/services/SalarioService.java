@@ -3,13 +3,18 @@ package com.ezequias.apiestudo.services;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.ezequias.apiestudo.domain.Meta;
 import com.ezequias.apiestudo.domain.Salario;
 import com.ezequias.apiestudo.domain.Vendedor;
 import com.ezequias.apiestudo.domain.enums.Cargo;
 import com.ezequias.apiestudo.dto.SalarioDTO;
 
+@Service
 public class SalarioService {
+	@Autowired
 	private MetaService metaService;
 	
 	public Salario calcularSalario(SalarioDTO salarioDTO) {
