@@ -14,6 +14,7 @@ import com.ezequias.apiestudo.domain.Vendedor;
 import com.ezequias.apiestudo.domain.enums.Cargo;
 import com.ezequias.apiestudo.dto.MetaDTO;
 import com.ezequias.apiestudo.dto.SalarioDTO;
+import com.ezequias.apiestudo.dto.VendedorDTO;
 
 @Service
 public class BancoService {
@@ -21,9 +22,15 @@ public class BancoService {
 	@Autowired
 	private MetaService metaService;
 	
+	@Autowired
+	private VendedorService vendedorService;
+	
 	public void instanciarBanco() throws ParseException {
 		Meta metaVendedores = criarMeta("Meta/Vendedores",1);
 		Meta metaRepresentantes = criarMeta("Meta/Representantes",2);
+		
+		Vendedor vendedor1 = criarVendedor(metaVendedores, "João da Silva");
+		Vendedor vendedor2 = criarVendedor(metaVendedores, "Pedro da Silva");
 		
 	}
 	
@@ -37,11 +44,22 @@ public class BancoService {
 		metaDTO.setDescricao(descricao);
 		metaDTO.setDataReferencia(dataReferencia);
 		
-		//MetaService metaService = new MetaService();
-		Meta meta = metaService.salvar(metaDTO);
-		
-		return meta;		
+		return metaService.salvar(metaDTO);		
 	}
+	
+	public Vendedor criarVendedor(Meta meta,String nome ) throws ParseException {	
+		
+		VendedorDTO vendedorDTO = new VendedorDTO();		
+		Date nascimento = new Date();		
+		
+		vendedorDTO.setId(null);
+		vendedorDTO.setNome(nome);
+		vendedorDTO.setNascimento(nascimento);
+		vendedorDTO.setMetaId(meta.getId());
+		
+		return vendedorService.salvar(vendedorDTO);
+	}
+	
 	
 	
 

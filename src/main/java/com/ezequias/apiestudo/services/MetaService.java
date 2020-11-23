@@ -1,5 +1,8 @@
 package com.ezequias.apiestudo.services;
 
+import java.util.Optional;
+
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +44,10 @@ public class MetaService {
 		metaRepository.save(meta);
 		
 		return meta;
+	}
+	
+	public Meta obterPorId(Integer id) {
+		return metaRepository.obterPorId(id);
 	}
 
 }
