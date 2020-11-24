@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.ezequias.apiestudo.domain.enums.Cargo;
+
 @Entity
 public class Representante extends Funcionario{
 	private static final long serialVersionUID = 1L;
@@ -16,17 +18,14 @@ public class Representante extends Funcionario{
 	@ManyToOne
 	@JoinColumn(name="meta_id")
 	private Meta meta;
-	
-	@OneToMany
-	@JoinColumn(name="representante_id")
-	private List<Salario> salarios = new ArrayList<>();
 
 	public Representante() {
-		
+		this.setCargo(Cargo.REPRESENTANTE);
 	}
 	
-	public Representante(Integer id, String nome, Date nascimento,Meta meta) {
-		super(id,nome,nascimento);	
+	public Representante(Integer id, String nome, Date nascimento, Meta meta) {
+		super(id,nome,nascimento);
+		this.setCargo(Cargo.REPRESENTANTE);
 		this.meta = meta;
 	}
 
@@ -37,16 +36,6 @@ public class Representante extends Funcionario{
 	public void setMeta(Meta meta) {
 		this.meta = meta;
 	}
-
-	public List<Salario> getSalarios() {
-		return salarios;
-	}
-
-	public void setSalarios(List<Salario> salarios) {
-		this.salarios = salarios;
-	}
-	
-	
 
 
 }

@@ -109,7 +109,7 @@ public class BancoService {
 		salarioDTO.setDataReferencia(dataReferencia);
 		salarioDTO.setSalarioBruto(1000.00);
 		salarioDTO.setDesconto(100.00);
-		salarioDTO.setEntidadeId(vendedor.getId());
+		salarioDTO.setFuncionarioId(vendedor.getId());
 		
 		return salarioService.salvar(salarioDTO);
 	}
@@ -124,7 +124,7 @@ public class BancoService {
 		salarioDTO.setDataReferencia(dataReferencia);
 		salarioDTO.setSalarioBruto(1000.00);
 		salarioDTO.setDesconto(100.00);
-		salarioDTO.setEntidadeId(representante.getId());
+		salarioDTO.setFuncionarioId(representante.getId());
 		
 		return salarioService.salvar(salarioDTO);
 	}

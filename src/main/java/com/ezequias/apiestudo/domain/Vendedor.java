@@ -1,13 +1,12 @@
 package com.ezequias.apiestudo.domain;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
+import com.ezequias.apiestudo.domain.enums.Cargo;
 
 @Entity
 public class Vendedor extends Funcionario{
@@ -17,16 +16,13 @@ public class Vendedor extends Funcionario{
 	@JoinColumn(name="meta_id")
 	private Meta meta;
 	
-	@OneToMany
-	@JoinColumn(name="vendedor_id")
-	private List<Salario> salarios = new ArrayList<>();
-
 	public Vendedor() {
-		
+		this.setCargo(Cargo.VENDEDOR);
 	}
 	
 	public Vendedor(Integer id, String nome, Date nascimento,Meta meta) {
 		super(id,nome,nascimento);	
+		this.setCargo(Cargo.VENDEDOR);
 		this.meta = meta;
 	}
 
@@ -37,16 +33,4 @@ public class Vendedor extends Funcionario{
 	public void setMeta(Meta meta) {
 		this.meta = meta;
 	}
-
-	public List<Salario> getSalarios() {
-		return salarios;
-	}
-
-	public void setSalarios(List<Salario> salarios) {
-		this.salarios = salarios;
-	}
-	
-	
-
-
 }

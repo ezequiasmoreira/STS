@@ -1,15 +1,20 @@
 package com.ezequias.apiestudo.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.ezequias.apiestudo.domain.enums.Cargo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Inheritance;
 
 @Entity
@@ -23,6 +28,12 @@ public class Funcionario implements Serializable{
 	
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date nascimento;
+	
+	private Integer cargo;
+	
+	@OneToMany
+	@JoinColumn(name="funcionario_id")
+	private List<Salario> salarios = new ArrayList<>();
 	
 	public Funcionario() {		
 	}
@@ -57,6 +68,22 @@ public class Funcionario implements Serializable{
 	public void setNascimento(Date nascimento) {
 		this.nascimento = nascimento;
 	}
+	
+	public List<Salario> getSalarios() {
+		return salarios;
+	}
+
+	public void setSalarios(List<Salario> salarios) {
+		this.salarios = salarios;
+	}
+	
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo.getCod();
+	}
+
+	public Cargo getCargo() {
+		return Cargo.toEnum(cargo);
+	}	
 
 	@Override
 	public int hashCode() {

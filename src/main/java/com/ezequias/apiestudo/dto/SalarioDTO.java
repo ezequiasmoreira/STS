@@ -11,7 +11,7 @@ public class SalarioDTO implements Serializable {
 	
 	private Integer id;
 	private Integer cargo;
-	private Integer entidadeId;
+	private Integer funcionarioId;
 	private Double salarioLiquido;
 	private Double salarioBruto;
 	private Double desconto;
@@ -22,10 +22,10 @@ public class SalarioDTO implements Serializable {
 	public SalarioDTO() {	
 	}
 
-	public SalarioDTO(Integer id, Integer entidadeId, Double salarioBruto, Double desconto,	Date dataReferencia) {
+	public SalarioDTO(Integer id, Integer funcionarioId, Double salarioBruto, Double desconto,	Date dataReferencia) {
 		super();
 		this.id = id;
-		this.entidadeId = entidadeId;
+		this.funcionarioId = funcionarioId;
 		this.salarioBruto = salarioBruto;
 		this.desconto = desconto;
 		this.dataReferencia = dataReferencia;
@@ -35,12 +35,12 @@ public class SalarioDTO implements Serializable {
 		return id;
 	}
 
-	public Integer getEntidadeId() {
-		return entidadeId;
+	public Integer getFuncionarioId() {
+		return funcionarioId;
 	}
 
-	public void setEntidadeId(Integer entidadeId) {
-		this.entidadeId = entidadeId;
+	public void setFuncionarioId(Integer funcionarioId) {
+		this.funcionarioId = funcionarioId;
 	}
 
 	public void setId(Integer id) {

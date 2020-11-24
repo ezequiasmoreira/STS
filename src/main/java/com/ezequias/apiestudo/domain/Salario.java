@@ -31,21 +31,23 @@ public class Salario implements Serializable{
 	private Date dataReferencia;
 		
 	@ManyToOne
-    @JoinColumn(name = "representante_id")
-    private Representante representante;
+    @JoinColumn(name = "funcionario_id")
+    private Funcionario funcionario;
 	
 	public Salario() {
+		
 	}
 	
 	public Salario(Integer id, Cargo cargo, Double salarioBruto, Double desconto,
-			Date dataReferencia) {
+			Date dataReferencia,Funcionario funcionario) {
 		super();
 		this.id = id;
-		this.cargo = cargo.getCod();
-		this.salarioLiquido = salarioBruto;
-		this.salarioBruto = salarioBruto;
 		this.desconto = desconto;
-		this.dataReferencia = dataReferencia;
+		this.cargo = cargo.getCod();
+		this.funcionario = funcionario;
+		this.salarioBruto = salarioBruto;
+		this.salarioLiquido = salarioBruto;
+		this.dataReferencia = dataReferencia;		
 	}
 
 	public Integer getId() {
@@ -94,6 +96,14 @@ public class Salario implements Serializable{
 
 	public void setDataReferencia(Date dataReferencia) {
 		this.dataReferencia = dataReferencia;
+	}	
+	
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 
 	@Override
@@ -120,9 +130,4 @@ public class Salario implements Serializable{
 			return false;
 		return true;
 	}
-
-	
-	
-	
-
 }

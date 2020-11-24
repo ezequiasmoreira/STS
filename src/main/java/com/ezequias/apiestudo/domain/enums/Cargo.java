@@ -3,7 +3,8 @@ package com.ezequias.apiestudo.domain.enums;
 public enum Cargo {
 
 	VENDEDOR(1,"Vendedor"),
-	REPRESENTANTE(2,"Representante");
+	REPRESENTANTE(2,"Representante"),
+	PADRAO(3,"Padrão");
 	
 	private int cod;
 	private String descricao;
