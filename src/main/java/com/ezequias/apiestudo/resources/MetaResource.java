@@ -6,7 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +29,7 @@ import com.ezequias.apiestudo.services.VendedorService;
 @RestController
 @RequestMapping(value="metas")
 public class MetaResource {
+	@Autowired
 	private MetaService metaService;
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -34,6 +38,18 @@ public class MetaResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 			return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	public ResponseEntity<Meta> obterPorId(@PathVariable Long id){
+		if(id < 1){
+			return ResponseEntity.badRequest().build();
+		}
+		Meta obj = metaService.obterPorId(id);
+		if(obj == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(obj);
 	}
 
 }

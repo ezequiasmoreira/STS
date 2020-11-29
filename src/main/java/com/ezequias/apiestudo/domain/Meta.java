@@ -16,7 +16,7 @@ public class Meta implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id ;
+	private Long id ;
 	private Double valor;
 	private String descricao;
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
@@ -27,7 +27,7 @@ public class Meta implements Serializable {
 	
 	}
 
-	public Meta(Integer id, Double valor, String descricao, Date dataReferencia, Double comissao) {
+	public Meta(Long id, Double valor, String descricao, Date dataReferencia, Double comissao) {
 		super();
 		this.id = id;
 		this.valor = valor;
@@ -44,11 +44,11 @@ public class Meta implements Serializable {
 		this.comissao = comissao;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -11,14 +11,14 @@ public class VendedorDTO implements Serializable {
 	
 	private Integer id ;
 	private String nome;
-	private Integer metaId;
+	private Long metaId;
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date nascimento;
 	
 	public VendedorDTO() {	
 	}
 
-	public VendedorDTO(Integer id, String nome, Date nascimento, Integer metaId) {
+	public VendedorDTO(Integer id, String nome, Date nascimento, Long metaId) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -50,11 +50,11 @@ public class VendedorDTO implements Serializable {
 		this.nascimento = nascimento;
 	}
 
-	public Integer getMetaId() {
+	public Long getMetaId() {
 		return metaId;
 	}
 
-	public void setMetaId(Integer metaId) {
+	public void setMetaId(Long metaId) {
 		this.metaId = metaId;
 	}
 	

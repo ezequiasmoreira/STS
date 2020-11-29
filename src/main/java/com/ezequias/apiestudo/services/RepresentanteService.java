@@ -28,7 +28,7 @@ public class RepresentanteService {
 		representante.setId(null);
 		representante.setNome(representanteDTO.getNome());
 		representante.setNascimento(representanteDTO.getNascimento());
-		representante.setMeta(metaService.obterPorId(representanteDTO.getMetaId()));
+		representante.setMeta(metaService.obterPorId( Long.valueOf(representanteDTO.getMetaId())));
 		
 		representanteRepository.save(representante);
 		

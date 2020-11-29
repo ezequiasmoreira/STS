@@ -25,7 +25,7 @@ public class VendedorService {
 		vendedor.setId(null);
 		vendedor.setNome(vendedorDTO.getNome());
 		vendedor.setNascimento(vendedorDTO.getNascimento());
-		vendedor.setMeta(metaService.obterPorId(vendedorDTO.getMetaId()));
+		vendedor.setMeta(metaService.obterPorId( Long.valueOf(vendedorDTO.getMetaId())));
 		
 		vendedorRepository.save(vendedor);
 		

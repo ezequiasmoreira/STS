@@ -13,6 +13,6 @@ public interface MetaRepository extends JpaRepository<Meta, Integer>{
 	
 	@Transactional(readOnly=true)
 	@Query("SELECT obj FROM Meta obj WHERE obj.id = :id ")
-	Meta obterPorId(@Param("id") Integer id);
+	Meta obterPorId(@Param("id") Long id);
 
 }

@@ -46,7 +46,7 @@ public class MetaService {
 		return meta;
 	}
 	
-	public Meta obterPorId(Integer id) {
+	public Meta obterPorId(Long id) {
 		return metaRepository.obterPorId(id);
 	}
 
